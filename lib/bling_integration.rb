@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'faraday'
+require 'json'
+
+require_relative 'bling_integration/http/base_client'
 require_relative "bling_integration/version"
 
 module BlingIntegration
