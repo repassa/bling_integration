@@ -5,7 +5,8 @@ require 'nokogiri'
 require 'json'
 
 require_relative 'bling_integration/http/base_client'
-require_relative "bling_integration/version"
+require_relative 'bling_integration/client'
+require_relative 'bling_integration/version'
 require_relative 'bling_integration/xml_builder'
 
 module BlingIntegration
