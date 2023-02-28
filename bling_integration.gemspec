@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '~> 2.7.3'
 
   spec.add_dependency 'faraday', '~> 1.0.1'
+  spec.add_dependency "nokogiri", ">= 1.11.5"
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
