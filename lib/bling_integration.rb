@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'bling_integration/http/base_client'
 require_relative "bling_integration/version"
 
 module BlingIntegration
