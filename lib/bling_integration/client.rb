@@ -15,10 +15,10 @@ module BlingIntegration
       @base_url = "#{ENDPOINT}/#{API_VERSION}/"
     end
 
-    def default_request(resource, params: {}, http_method: :post)
+    def default_request(resource, params: {}, http_method: :post, return_type: 'json')
       request(
         http_method: http_method,
-        endpoint:    resource,
+        endpoint:    "#{resource}/#{return_type}",
         params:      params,
         headers:     required_headers
       ).deep_symbolize_keys
