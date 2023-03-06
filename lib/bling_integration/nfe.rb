@@ -12,6 +12,14 @@ module BlingIntegration
       request(data)
     end
 
+    def generate_nfse(numero_rps: nil, serie: nil)
+      client.generate_nfse(numero_rps, serie, @options[:api_key])
+    end
+
+    def nfse(numero_rps: nil)
+      client.nfse(numero_rps, @options[:api_key])
+    end
+
     private
 
     def request(data = {})
