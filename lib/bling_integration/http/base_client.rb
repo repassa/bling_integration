@@ -13,7 +13,7 @@ module BlingIntegration
       UnprocessableEntityError = Class.new(APIExceptionError)
 
       #== STATUS CODE ==========================================
-      HTTP_OK_CODE                   = 200
+      HTTP_OK_CODE                   = [200, 201].freeze
       HTTP_BAD_REQUEST_CODE          = 400
       HTTP_UNAUTHORIZED_CODE         = 401
       HTTP_FORBIDDEN_CODE            = 403
@@ -58,7 +58,7 @@ module BlingIntegration
       end
 
       def response_successful?
-        response.status == HTTP_OK_CODE
+        HTTP_OK_CODE.include?(response.status)
       end
 
       def transform_keys(item)
