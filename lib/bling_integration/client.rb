@@ -20,15 +20,18 @@ module BlingIntegration
         http_method: http_method,
         endpoint:    "#{resource}/#{return_type}",
         params:      params,
-        headers:     required_headers
-      ).deep_symbolize_keys
+        headers:     required_headers(http_method)
+      )
     end
 
     private
 
-    def required_headers
+    def required_headers(http_method)
+      content_type = 'application/x-www-form-urlencoded'
+      content_type = 'application/json' if http_method.to_sym == :get
+
       {
-        'Content-Type' => 'application/x-www-form-urlencoded'
+        'Content-Type' => content_type
       }
     end
   end
