@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "Gem responsável pela integração com os serviços do Bling"
   spec.homepage = "https://www.repassa.com.br"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
   spec.metadata["allowed_push_host"] = ""
 
@@ -29,8 +29,6 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
-  spec.required_ruby_version = '~> 2.7.3'
 
   spec.add_dependency 'faraday', '~> 1.0.1'
   spec.add_dependency "nokogiri", ">= 1.11.5"
