@@ -20,11 +20,14 @@ module BlingIntegration
       HTTP_NOT_FOUND_CODE            = 404
       HTTP_UNPROCESSABLE_ENTITY_CODE = 429
 
-      def request(http_method:, endpoint:, params: {}, headers: {}, token:)
+      def request(http_method:, endpoint:, params: {}, headers: {}, token: {})
         @token = token[:token]
-        
+
         @response = client.public_send(http_method, endpoint, params, add_default_headers(headers)) do |req|
-          req.body = params.to_json unless [:get, :delete].include?(http_method)
+          unless [:get, :delete].include?(http_method)
+            params = params.to_json if params.class == Hash
+            req.body = params
+          end
         end
 
         return JSON.parse(@response.body) if response_successful?
