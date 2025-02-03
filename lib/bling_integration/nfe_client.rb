@@ -3,7 +3,7 @@
 module BlingIntegration
   class NfeClient < Client
 
-    def enviar_rps(id_rps) 
+    def enviar_rps(id_rps, token) 
       default_request("nfse/#{id_rps}/enviar", token: token)
     end
     
