@@ -20,8 +20,16 @@ module BlingIntegration
       HTTP_NOT_FOUND_CODE            = 404
       HTTP_UNPROCESSABLE_ENTITY_CODE = 429
 
-      def request(http_method:, endpoint:, params: {}, headers: {})
-        @response = client.public_send(http_method, endpoint, params, add_default_headers(headers))
+      def request(http_method:, endpoint:, params: {}, headers: {}, token: {})
+        @token = token[:token]
+
+        @response = client.public_send(http_method, endpoint, params, add_default_headers(headers)) do |req|
+          unless [:get, :delete].include?(http_method)
+            params = params.to_json if params.class == Hash
+            req.body = params
+          end
+        end
+
         return JSON.parse(@response.body) if response_successful?
 
         raise error_class, "Code: #{@response.status}, response: #{@response.body}"
@@ -31,7 +39,7 @@ module BlingIntegration
 
       def client
         @client = Faraday.new(base_url) do |client|
-          client.request :url_encoded
+          client.request :authorization, :bearer, @token
           client.adapter Faraday.default_adapter
         end
       end

@@ -2,29 +2,41 @@
 
 module BlingIntegration
   class Nfe
-    def initialize(options = {})
-      @options = {
-        api_key: ''
-      }.merge(options)
+    attr_reader :token
+
+    def initialize(token: )
+      @token = token
     end
 
-    def send_xml(data = {})
-      request(data)
+    def enviar_rps(id_rps)
+      client.enviar_rps(id_rps, token: token)
     end
 
-    def generate_nfse(numero_rps: nil, serie: nil)
-      client.generate_nfse(numero_rps, serie, @options[:api_key])
+    def generate_rps(data)
+      client.generate_rps(data, token: token)
     end
 
-    def nfse(numero_rps: nil)
-      client.nfse(numero_rps, @options[:api_key])
+    def novo_contato(data)
+      client.novo_contato(data, token: token)
+    end
+
+    def contatos(documento)
+      client.contatos(documento, token: token)
+    end
+
+    def nfse(id_nota_servico)
+      client.nfse(id_nota_servico, token: token)
+    end
+
+    def nfses
+      client.nfses(token: token)
     end
 
     private
 
     def request(data = {})
       xml = XmlBuilder.new.xml_for(data)
-      client.send_xml(xml, @options[:api_key])
+      client.send_xml(xml, token: token)
     rescue => error
       error
     end

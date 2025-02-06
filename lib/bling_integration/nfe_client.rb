@@ -2,29 +2,33 @@
 
 module BlingIntegration
   class NfeClient < Client
-    def send_xml(xml, api_key)
-      params = {
-        apikey: api_key,
-        xml:    xml
-      }
-      default_request('notaservico', params: params)
+
+    def enviar_rps(id_rps) 
+      default_request("nfse/#{id_rps}/enviar", token: token)
+    end
+    
+    def generate_rps(data, token)
+      default_request('nfse', params: data, token: token)
     end
 
-    def generate_nfse(numero_rps, serie, api_key)
-      params = {
-        apikey: api_key,
-        number: numero_rps,
-        serie:  serie
-      }
-      default_request('notaservico', params: params)
+    def novo_contato(data, token)
+      default_request("contatos", params: data, token: token)
     end
 
-    def nfse(numero_rps, api_key)
+    def contatos(documento, token)
       params = {
-        apikey: api_key,
-        number: numero_rps
+        numeroDocumento: documento
       }
-      default_request("notaservico/#{numero_rps}", params: params, http_method: :get)
+
+      default_request("contatos", http_method: :get,  params: params, token: token)
+    end
+
+    def nfse(id_nota_servico, token)
+      default_request("nfse/#{id_nota_servico}", http_method: :get, token: token)
+    end
+
+    def nfses(token)
+      default_request("nfse", http_method: :get, token: token)
     end
   end
 end
