@@ -23,6 +23,7 @@ module BlingIntegration
       def request(http_method:, endpoint:, params: {}, headers: {}, token: {})
         @token = token[:token]
 
+
         @response = client.public_send(http_method, endpoint, params, add_default_headers(headers)) do |req|
           unless [:get, :delete].include?(http_method)
             params = params.to_json if params.class == Hash

@@ -32,6 +32,16 @@ module BlingIntegration
       client.nfses(token: token)
     end
 
+    def consulta_nfse( 
+      situacao: 0,
+      data_inicial: '2025-01-01', 
+      data_final: Date.current.to_s
+     )
+      
+     client.consulta_nfse(situacao, data_inicial, data_final, token: token)
+    end
+
+    
     private
 
     def request(data = {})
