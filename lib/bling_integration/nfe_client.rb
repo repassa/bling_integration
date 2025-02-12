@@ -29,5 +29,16 @@ module BlingIntegration
     def nfses(token)
       default_request('nfse', http_method: :get, token: token)
     end
+
+    def consulta_nfse(situacao, data_inicial, data_final, pagina, token)
+      params = {
+        situacao: situacao,
+        dataEmissaoInicial: data_inicial,
+        dataEmissaoFinal:   data_final,
+        pagina: pagina
+      }
+
+      default_request('nfse', http_method: :get, token: token, params: params)
+    end
   end
 end
